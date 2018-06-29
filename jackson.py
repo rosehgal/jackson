@@ -17,7 +17,6 @@ __date__ = '28 June 2018'
 __author__ = ('Rohit Sehgal <rsehgal@cse.iitk.ac.in>')
 
 
-
 import re
 import os
 import builtins
@@ -27,7 +26,7 @@ from importlib import import_module
 class REResolver:
     """
     This class defines how the values from the jackson file will be translated
-    to in memory json (having secrets) file. 
+    to in memory json (having secrets) file.
 
     For now it supports translations from either environment variables or from
     other python functions. Which are specified in MATCH_REGEX
@@ -50,12 +49,13 @@ class REResolver:
 
     @staticmethod
     def _resolve(m):
+
         """
-        This method will be called after match to one of the groups specified in
-        MATCH_REGEX. Since for now, MATCH_REGEX only contains two groups, one
-        for resolution to the environment variables and other is call to some
-        other python functions.
-        
+        This method will be called after match to one of the groups
+        specified in MATCH_REGEX. Since for now, MATCH_REGEX only contains two
+        groups, one for resolution to the environment variables and other is
+        call to some other python functions.
+
         This function is very much dependent on MATCH_REGEX groups.
 
         Arguments:
@@ -100,10 +100,10 @@ class File(object):
     save secret from JSON file environment variables and in the extended
     JSON(jackson) file, pass the reference to those environment variable. The
     reference to those environment variables takes place in memory.
-    
-    This extension is also pluggable, like if you have secrets stored in some HSM or
-    remote servers then you can write a wrapper around the locations, and the
-    location of those python wrapper(functions) which takes care of that.
+
+    This extension is also pluggable, like if you have secrets stored in some
+    HSM or remote servers then you can write a wrapper around the locations, and
+    the location of those python wrapper(functions) which takes care of that.
     """
 
     def __init__(self, path, *args, **kwargs):
@@ -113,10 +113,10 @@ class File(object):
         self._file = builtins.open(path, *args, **kwargs)
         self._resolver = REResolver()
 
-    def read(self, n_bytes = -1):
+    def read(self, n_bytes=-1):
         """
         This function mimics the builtin file.read but with resolution.
-        
+
         Arguments:
           n_bytes (int): The count of value read at once.
         """
@@ -136,4 +136,3 @@ def open(path, *args, **kwargs):
     Function that will return jackson file type object.
     """
     return File(path, *args, **kwargs)
-
