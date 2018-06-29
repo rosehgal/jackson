@@ -1,7 +1,9 @@
-#!/usr/bin/env python3
+#! /usr/bin/env python3
+# -*- coding: utf-8 -*-
 
 
-"""Jackson module.
+"""
+Jackson module.
 
 This module does all the translations from the jackson (The extension of JSON)
 type file to json file. The extension offered in package, allows the value of
@@ -9,7 +11,6 @@ JSON to be resolved at runtime.
 
 For now it only supports env variables and call to the functions returning
 strings.
-
 """
 
 
@@ -17,10 +18,16 @@ __date__ = '28 June 2018'
 __author__ = ('Rohit Sehgal <rsehgal@cse.iitk.ac.in>')
 
 
+from typing import Any
+from importlib import import_module
+
 import re
 import os
 import builtins
-from importlib import import_module
+import traceback
+import sre_compile
+
+Match = type(sre_compile.compile('', 0).match(''))  # cf. Lib/re.py#L263
 
 
 class REResolver:
@@ -36,7 +43,7 @@ class REResolver:
         - !foo.bar.baz: the python notation of calling method from other python
             file.
     """
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Create a object that will perform, regex match/replace upon call.
         """
@@ -48,8 +55,7 @@ class REResolver:
         self._re = re.compile(self.MATCH_REGEX)
 
     @staticmethod
-    def _resolve(m):
-
+    def _resolve(m: Match) -> str:
         """
         This method will be called after match to one of the groups
         specified in MATCH_REGEX. Since for now, MATCH_REGEX only contains two
@@ -57,11 +63,6 @@ class REResolver:
         call to some other python functions.
 
         This function is very much dependent on MATCH_REGEX groups.
-
-        Arguments:
-          m (SRE_Match): The result of re.match() or re.search.
-        Return:
-          string: resolved values of env or of function call.
         """
 
         # for environment variables
@@ -79,20 +80,15 @@ class REResolver:
             f = getattr(module, function_name)
             return f()
 
-    def resolve(self, data):
+    def resolve(self, data: str) -> str:
         """
         This function handles the task of resolving the data(string) by
         performing regex match of data with MATCH_REGEX.
-
-        Arguments:
-          data (string): Input to test/replace with MATCH_REGEX.
-        Return:
-          string: after resolution
         """
         return self._re.sub(REResolver._resolve, data)
 
 
-class File(object):
+class File:
     """
     This call represents basic file like object for jackson files.
 
@@ -106,14 +102,14 @@ class File(object):
     the location of those python wrapper(functions) which takes care of that.
     """
 
-    def __init__(self, path, *args, **kwargs):
+    def __init__(self, path: str, *args: Any, **kwargs: Any) -> None:
         """
         Initialize various class parameters and REResolver
         """
         self._file = builtins.open(path, *args, **kwargs)
         self._resolver = REResolver()
 
-    def read(self, n_bytes=-1):
+    def read(self, n_bytes: int = -1):
         """
         This function mimics the builtin file.read but with resolution.
 
@@ -123,16 +119,17 @@ class File(object):
         data = self._file.read(n_bytes)
         return self._resolver.resolve(data)
 
-    def __enter__(self):
+    def __enter__(self) -> 'File':
         return self
 
-    def __exit__(self, e_type, e_val, e_tb):
+    def __exit__(self, exception_type: type, exception_value: Exception,
+                 traceback: traceback) -> None:
         self._file.close()
         self._file = None
 
-
-def open(path, *args, **kwargs):
-    """
-    Function that will return jackson file type object.
-    """
-    return File(path, *args, **kwargs)
+    @classmethod
+    def open(cls, path: str, *args: Any, **kwargs: Any) -> 'File':
+        """
+        Function that will return jackson file type object.
+        """
+        return cls(path, *args, **kwargs)
