@@ -34,19 +34,19 @@ Inside the code.
 ```python3
 import jackson
 import json    # For converting JackSON --> JSON
-d = json.load(jackson.open("./config.jackson"))
+d = json.load(jackson.File.open("./config.jackson"))
 print(d)
 ```
 And this is how it looks.
 ```bash
 {
-	'key3': 'reached',
-	'key2': '100',
-	'key1': '10',
-	'key4': 'value4',
-        '_comment4': 'key/value pair similar to json',
-	'_comment3': 'Value from python module',
-	'_comment2': 'Value from bar env variable',
-	'_comment1': 'Value from foo env variable'
+    'key3': 'reached',
+    'key2': '100',
+    'key1': '10',
+    'key4': 'value4',
+    '_comment4': 'key/value pair similar to json',
+    '_comment3': 'Value from python module',
+    '_comment2': 'Value from bar env variable',
+    '_comment1': 'Value from foo env variable'
 }
 ```

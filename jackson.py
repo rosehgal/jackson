@@ -47,7 +47,7 @@ class REResolver:
         """
         Create a object that will perform, regex match/replace upon call.
         """
-        self.MATCH_REGEX = '(env.\w*)|(!\w*[\.\w]*)'
+        self.MATCH_REGEX = '(env\.\w*)|(!\w*[\.\w]*)'
         # This regex will match something like:
         # env.FOO
         # !foo.bar.baz
