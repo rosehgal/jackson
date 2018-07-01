@@ -35,6 +35,8 @@ Inside the code.
 import jackson
 import json    # For converting JackSON --> JSON
 d = json.load(jackson.File.open("./config.jackson"))
+            ### OR
+d = json.load(jackson.File("./config.jackson"))
 print(d)
 ```
 And this is how it looks.
