@@ -1,6 +1,6 @@
 # J<sub>ack</sub>SON
 <p align="center">
-<img src="./jackson.png" height="300px"/>
+<img src="./ext/jackson.png" height="300px"/>
 </p>  
 
 Have you ever used JSON as your config? Have you keep secrets in config as plain text, that you dont want to? Then this is the right tool for you.  
@@ -12,7 +12,7 @@ The problem that it solves:
 
 ### How to J<sub>ack</sub>SON
 J<sub>ack</sub>SON is exported as python package. You can install it via `pip`.  
-`pip install --user `
+`pip install --user jackson`
 ```bash
 export foo=10
 export bar=100
@@ -40,16 +40,16 @@ d = json.load(jackson.File("./config.jackson"))
 print(d)
 ```
 And this is how it looks.
-```bash
+```json
 {
-    'key3': 'reached',
-    'key2': '100',
-    'key1': '10',
-    'key4': 'value4',
-    '_comment4': 'key/value pair similar to json',
-    '_comment3': 'Value from python module',
-    '_comment2': 'Value from bar env variable',
-    '_comment1': 'Value from foo env variable'
+    "key3": "reached",
+    "key2": "100",
+    "key1": "10",
+    "key4": "value4",
+    "_comment4": "key/value pair similar to json",
+    "_comment3": "Value from python module",
+    "_comment2": "Value from bar env variable",
+    "_comment1": "Value from foo env variable"
 }
 ```
 ***
