@@ -1,5 +1,0 @@
-{
-"key1": env.foo,
-"key2": env.bar,
-"key3": "!a.b"
-}
