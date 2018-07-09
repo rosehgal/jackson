@@ -50,3 +50,9 @@ And this is how it looks.
     "_comment1": "Value from foo env variable"
 }
 ```
+***
+### Key Feature:
+* Reference to environment variables.
+* Reference to the code, which will resolves to secret variable.
+***
+Pull request are more than an appriciation.
