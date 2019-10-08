@@ -15,7 +15,7 @@ strings.
 
 
 __date__ = '28 June 2018'
-__author__ = ('Rohit Sehgal <rsehgal@cse.iitk.ac.in>')
+__author__ = ('Rohit Sehgal <rohitsehgal1994@gmail.com>')
 
 
 from typing import Any
