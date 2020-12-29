@@ -51,8 +51,8 @@ And this is how it looks.
 }
 ```
 ***
-### Key Feature:
+### Key Features:
 * Reference to environment variables.
-* Reference to the code, which will resolves to secret variable.
+* Reference to the code, which will resolve to secret variable.
 ***
 Pull requests are more than appreciated.
