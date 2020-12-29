@@ -55,4 +55,4 @@ And this is how it looks.
 * Reference to environment variables.
 * Reference to the code, which will resolves to secret variable.
 ***
-Pull request are more than appreciated.
+Pull requests are more than appreciated.
